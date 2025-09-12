@@ -37,8 +37,11 @@ y_pred = model.predict(X_test)
 # -----------------------------
 # 3. Model Evaluation
 # -----------------------------
-rmse_water = mean_squared_error(y_test["water_liters"], y_pred[:, 0], squared=False)
-rmse_elec = mean_squared_error(y_test["electricity_kwh"], y_pred[:, 1], squared=False)
+from sklearn.metrics import mean_squared_error
+import numpy as np
+
+rmse_water = np.sqrt(mean_squared_error(y_test["water_liters"], y_pred[:, 0]))
+rmse_elec = np.sqrt(mean_squared_error(y_test["electricity_kwh"], y_pred[:, 1]))
 
 r2_water = r2_score(y_test["water_liters"], y_pred[:, 0])
 r2_elec = r2_score(y_test["electricity_kwh"], y_pred[:, 1])
